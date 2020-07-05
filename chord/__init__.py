@@ -27,6 +27,11 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+# Relative import for local mako template
+import os
+package_dir = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(package_dir, 'd3_template.tmpl')
+
 from mako.template import Template
 import mako.runtime
 import uuid
@@ -36,9 +41,8 @@ mako.runtime.UNDEFINED = ""
 
 
 class Chord(object):
-    # template_url = "https://shahinrostami.com/assets/chord/chord_0_0_12.tmpl"
 
-    template = open('d3_template.tmpl', 'r').read()
+    template = open(file=template_path).read()
 
     def __init__(
             self,
