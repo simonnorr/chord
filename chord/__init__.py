@@ -29,7 +29,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from mako.template import Template
 import mako.runtime
-import urllib.request
 import uuid
 
 # undefined template values default to empty strings
@@ -37,24 +36,24 @@ mako.runtime.UNDEFINED = ""
 
 
 class Chord(object):
-    template_url = "https://shahinrostami.com/assets/chord/chord_0_0_12.tmpl"
+    # template_url = "https://shahinrostami.com/assets/chord/chord_0_0_12.tmpl"
 
-    template = urllib.request.urlopen(template_url).read()
+    template = open('d3_template.tmpl', 'r').read()
 
     def __init__(
-        self,
-        matrix,
-        names,
-        colors="d3.schemeSet1",
-        opacity=0.8,
-        padding=0.01,
-        width=700,
-        label_color="#454545",
-        wrap_labels=True,
-        margin=0,
-        credit=False,
-        font_size="16px",
-        font_size_large="20px",
+            self,
+            matrix,
+            names,
+            colors="d3.schemeSet1",
+            opacity=0.8,
+            padding=0.01,
+            width=700,
+            label_color="#454545",
+            wrap_labels=True,
+            margin=0,
+            credit=False,
+            font_size="16px",
+            font_size_large="20px",
     ):
         self.html = Chord.template
         self.matrix = matrix
