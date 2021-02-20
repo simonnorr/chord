@@ -27,9 +27,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+# Relative import for local mako template
+import os
+package_dir = os.path.dirname(os.path.abspath(__file__))
+template_path = os.path.join(package_dir, 'd3_template.tmpl')
+
 from mako.template import Template
 import mako.runtime
-import urllib.request
 import uuid
 
 # undefined template values default to empty strings
@@ -38,13 +42,12 @@ mako.runtime.UNDEFINED = ""
 
 class Chord(object):
 
-    template = None
+    template = open(file=template_path).read()
 
     def __init__(
             self,
             matrix,
             names,
-            template_url,
             colors="d3.schemeSet1",
             opacity=0.8,
             padding=0.01,
@@ -56,7 +59,6 @@ class Chord(object):
             font_size="16px",
             font_size_large="20px",
     ):
-        Chord.template = urllib.request.urlopen(template_url).read()
         self.html = Chord.template
         self.matrix = matrix
         self.names = names
